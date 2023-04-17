@@ -1,11 +1,23 @@
 import trashImage from './trash.png';
 import App from "./App";
 import Count from './counter';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 export default function Checkbox ({fruits}) { 
-  const [selectedFruits, setSelectedFruits] = useState({});
-  const [Fruits, setFruits] = useState([]);
-  const [cont, setCont] = useState(0);
+  const [selectedFruits, setSelectedFruits] = useState(JSON.parse(localStorage.getItem('selectedFruits')) || {});;
+  const [Fruits, setFruits] = useState(JSON.parse(localStorage.getItem('Fruits')) || []);
+  const [cont, setCont] = useState(JSON.parse(localStorage.getItem('cont')) || 0);
+  useEffect(() => {
+    localStorage.setItem('selectedFruits', JSON.stringify(selectedFruits));
+  }, [selectedFruits]);
+
+  useEffect(() => {
+    localStorage.setItem('Fruits', JSON.stringify(Fruits));
+  }, [Fruits]);
+
+  useEffect(() => {
+    localStorage.setItem('cont', JSON.stringify(cont));
+  }, [cont]);
+  
   const buttonStyle = {
     backgroundColor: "white",
     backgroundImage: `url(${trashImage})`,
@@ -46,7 +58,7 @@ export default function Checkbox ({fruits}) {
       setCont(cont-1);
     }
   }
-  const list = fruits.filter((element) => !Fruits.includes(element));
+  let list= fruits.filter((element) => !Fruits.includes(element));
   return (
     <div>
       {list.map((fruit) => (
