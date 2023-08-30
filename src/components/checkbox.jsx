@@ -1,9 +1,11 @@
-import trashImage from './trash.png';
+import trashImage from '../trash.png';
 import App from "./App";
 import Count from './counter';
 import React, { useState, useEffect } from 'react';
+import { Radio, RadioGroup } from '@chakra-ui/react'
+import { color } from 'framer-motion';
 export default function Checkbox ({fruits}) { 
-  const [selectedFruits, setSelectedFruits] = useState(JSON.parse(localStorage.getItem('selectedFruits')) || {});;
+  const [selectedFruits, setSelectedFruits] = useState(JSON.parse(localStorage.getItem('selectedFruits')) || {});
   const [Fruits, setFruits] = useState(JSON.parse(localStorage.getItem('Fruits')) || []);
   const [cont, setCont] = useState(JSON.parse(localStorage.getItem('cont')) || 0);
   useEffect(() => {
@@ -58,7 +60,7 @@ export default function Checkbox ({fruits}) {
       setCont(cont-1);
     }
   }
-  let list= fruits.filter((element) => !Fruits.includes(element));
+  const list = fruits.filter((element) => !Fruits.includes(element));
   return (
     <div>
       {list.map((fruit) => (
@@ -66,9 +68,9 @@ export default function Checkbox ({fruits}) {
           key={fruit}
           style={{ width:"350px", height: "110px", border:"3px solid" ,
            borderRadius: "10px", backgroundColor: getFruitColor(fruit), 
-          padding: '10px', margin: "10px auto"}}
+          padding: '10px', margin: "10px auto", textAlign: "center"}}
         >
-          <span style={{textAlign: "center", fontWeight: "bolder", fontSize: "15px"}}>{fruit}</span>
+          <span style={{textAlign: "left", fontWeight: "bolder", fontSize: "15px", color: "black"}}>{fruit}</span>
           <div style= {{textAlign: "left"}}>
             <input
               style= {{accentColor: "brown"}}
