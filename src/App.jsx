@@ -1,16 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Checkbox from './checkbox'
 
 function App() {
-  const [message, setMessage] = useState([]);
+  const [message, setMessage] = useState(
+    JSON.parse(localStorage.getItem("message")) || ""
+  );
   const [val, setVal] = useState('');
   const change = event => {
     setVal(event.target.value);
   }
+  useEffect(() => {
+    localStorage.setItem("message", JSON.stringify(message));
+  }, [message]);
   const Clean = () =>{
+    
     setMessage(message.concat(val));
     setVal('');
   }
